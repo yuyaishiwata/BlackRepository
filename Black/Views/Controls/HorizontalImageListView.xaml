@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:cont = "clr-namespace:Black.Views.Controls"
+            x:Class="Black.Views.Controls.HorizontalImageListView"
+            x:Name="this">
+    <ContentView.Content>
+        <StackLayout>
+            <Label Text="{Binding Title, Source={x:Reference this}}"
+                   LineBreakMode="TailTruncation"
+                   TextColor="White" 
+                   FontSize="30"
+                   FontAttributes="Bold" />
+            <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                <StackLayout x:Name="horizontalStack" Spacing="5" Padding="5" Orientation="Horizontal" Margin="15, 0, 0, 0">
+                    <!-- Childrenはコードビハインドで定義 -->
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

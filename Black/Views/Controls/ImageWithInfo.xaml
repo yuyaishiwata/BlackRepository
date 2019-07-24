@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Black.Views.Controls.ImageWithInfo"
+             x:Name="this"
+             HorizontalOptions="Start"
+             VerticalOptions="Start" Margin="0" Padding="0">
+    <ContentView.Content>
+        <StackLayout HorizontalOptions="Start" VerticalOptions="Start" Margin="0" Padding="0">
+            <Frame BackgroundColor="{Binding BorderColor, Source={x:Reference this}}"
+                   CornerRadius="{Binding OutsideCornerRadius, Source={x:Reference this}}"
+                   HasShadow="False"
+                   HorizontalOptions="Start"
+                   IsClippedToBounds="true"
+                   Margin="0"
+                   Padding="{Binding BorderSize, Source={x:Reference this}}"
+                   VerticalOptions="Start">
+                <Frame BackgroundColor="Transparent"
+                       CornerRadius="{Binding InsideCornerRadius, Source={x:Reference this}}"
+                       HasShadow="False" 
+                       HorizontalOptions="Start"
+                       IsClippedToBounds="true"
+                       Margin="0"
+                       Padding="0"
+                       VerticalOptions="Start">
+                    <Image Aspect="AspectFill"
+                           Source="{Binding Source, Source={x:Reference this}}"
+                           MinimumHeightRequest="{Binding ImageHeightRequest, Source={x:Reference this}}"
+                           MinimumWidthRequest="{Binding ImageWidthRequest, Source={x:Reference this}}"
+                           Margin="0"/>
+                </Frame>
+            </Frame>
+            <Label x:Name="title"
+                   FontSize="{Binding TitleFontSize, Source={x:Reference this}}"
+                   FontAttributes="Bold"
+                   LineBreakMode="TailTruncation" 
+                   Text="{Binding Title, Source={x:Reference this}}"
+                   TextColor="{Binding TitleColor, Source={x:Reference this}}" />
+            <Label x:Name="description"
+                   FontSize="{Binding DescriptionFontSize, Source={x:Reference this}}"
+                   LineBreakMode="TailTruncation"
+                   Text="{Binding Description, Source={x:Reference this}}"
+                   TextColor="{Binding DescriptionColor, Source={x:Reference this}}" />
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

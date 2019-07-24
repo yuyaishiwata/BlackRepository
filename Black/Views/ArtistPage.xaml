@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cont="clr-namespace:Black.Views.Controls"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             x:Class="Black.Views.ArtistPage"
+             Title="{Binding Title}"
+             BackgroundColor="Black">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <AbsoluteLayout>
+                    <Image AbsoluteLayout.LayoutFlags="WidthProportional"
+                           AbsoluteLayout.LayoutBounds="0, 0, 1, AutoSize"
+                           Aspect="AspectFill" MinimumHeightRequest="130"
+                           HeightRequest="130"
+                           Opacity="0.3"
+                           Source="{Binding Artist.Images[1].Url}" Margin="0"/>
+                    <StackLayout Orientation="Horizontal" Padding="15, 0, 0, 0"
+                               AbsoluteLayout.LayoutBounds="0, 1, 1, AutoSize"
+                               AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional">
+                        <cont:ImageWithInfo Source="{Binding Artist.Images[1].Url}"
+                                            BorderSize="3" CornerRadius="15" BorderColor="White"
+                                            HeightRequest="80"
+                                            WidthRequest="80"
+                                            MinimumWidthRequest="80"
+                                            MinimumHeightRequest="80"
+                                            Margin="15, 0, 15, 15" />
+                        <StackLayout Padding="0, 0, 0, 15" Margin="0" Spacing="0">
+                            <Label Text="{Binding Artist.Name}"
+                                   FontSize="35" FontAttributes="Bold"/>
+                            <StackLayout Orientation="Horizontal"
+                                         Margin="0" Padding="0" Spacing="0">
+                                <Label FontSize="Medium" FontAttributes="Bold"
+                                       Text="{Binding Artist.Followers.Total, StringFormat='{}{0:#,0}'}"
+                                       TextColor="#0088ff"/>
+                                <Label Text="フォロワー" TextColor="Silver"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </AbsoluteLayout>
+                
+                <BoxView HeightRequest="3" BackgroundColor="#0033cc"
+                         Margin="0"/>
+
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="その他" BackgroundColor="Blue" CornerRadius="5"
+                            HorizontalOptions="FillAndExpand"
+                            Margin="20"/>
+                    <Button Text="aaaa" BackgroundColor="Silver" CornerRadius="5"
+                            HorizontalOptions="FillAndExpand"
+                            Margin="20"/>
+                </StackLayout>
+
+                <Label Text="アーティストの楽曲："
+                       FontAttributes="Bold"
+                       FontSize="20"
+                       Margin="15, 15, 5, 0"/>
+                <cont:GridImagesView Stack="{Binding ArtistsAlbums, Converter={StaticResource albumsToImages}}"
+                                     RowHeight="2" ColumnHeight="10"
+                                     Padding="0, 10"
+                                     CornerRadius="3"
+                                     ImageWidthRequest="120"
+                                     HorizontalOptions="CenterAndExpand"
+                                     Orientation="Horizontal"
+                                     BorderSize="1"
+                                     TitleFontSize="15"
+                                     DescriptionFontSize="10" />
+                <Label Text="関連するアーティスト："
+                       FontAttributes="Bold"
+                       FontSize="20"
+                       Margin="15, 15, 5, 0"/>
+                <cont:GridImagesView Stack="{Binding RelatedArtists, Converter={StaticResource artistsToImages}}"
+                                     RowHeight="2"
+                                     Padding="0, 10"
+                                     IsCircle="true"
+                                     ImageWidthRequest="120"
+                                     HorizontalOptions="CenterAndExpand"
+                                     Orientation="Horizontal"
+                                     TitleFontSize="15"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

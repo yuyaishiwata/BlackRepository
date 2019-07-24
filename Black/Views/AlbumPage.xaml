@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cont="clr-namespace:Black.Views.Controls"
+             xmlns:conv="clr-namespace:Black.Converters"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             x:Class="Black.Views.AlbumPage" Title="{Binding Title}"
+             BackgroundColor="Black">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <AbsoluteLayout>
+                    <Image AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+                           AbsoluteLayout.LayoutBounds="0, 0, 1, AutoSize"
+                           Aspect="AspectFill" HeightRequest="180" Source="{Binding Album.Images[1].Url}"
+                           Margin="0" Opacity="0.4"/>
+                    <StackLayout AbsoluteLayout.LayoutFlags="WidthProportional"
+                                 AbsoluteLayout.LayoutBounds="0, 0, 1, AutoSize"
+                                 Padding="15, 0, 0, 0" Margin="0" HeightRequest="180"
+                                 Spacing="0">
+                        <StackLayout Orientation="Horizontal" Margin="0, 30">
+                            <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
+                                <Label Text="{Binding Album.Name}" VerticalOptions="Start" FontSize="40" FontAttributes="Bold" />
+                                <Label Text="{Binding Album.Artists[0].Name}" FontSize="Large" FontAttributes="Bold"
+                                       TextColor="Silver" VerticalOptions="End" />
+                            </StackLayout>
+                            <cont:ImageWithInfo Source="{Binding Album.Images[1].Url}"
+                                                BorderSize="3"
+                                                BorderColor="White"
+                                                Padding="0"
+                                                Margin="0"
+                                                MinimumWidthRequest="150"
+                                                VerticalOptions="Start" HorizontalOptions="End"/>
+                        </StackLayout>
+                        <Label Text="{Binding Album.Label}" TextColor="White"
+                               HorizontalTextAlignment="Center"
+                               VerticalOptions="EndAndExpand"
+                               LineBreakMode="TailTruncation" Margin="0, 0, 0, 10"/>
+                    </StackLayout>
+                </AbsoluteLayout>
+
+                <BoxView HeightRequest="3" Color="#888888" Margin="0" />
+                
+                <StackLayout VerticalOptions="Fill">
+                    <StackLayout Orientation="Horizontal" Padding="20, 15, 20, 5" BackgroundColor="Black">
+                        <Label Text="収録曲" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" />
+                        <Label Text="{Binding Album.Tracks.Total}" FontSize="20"
+                               HorizontalTextAlignment="End"
+                               VerticalTextAlignment="Center"
+                               FontAttributes="Bold"/>
+                        <Label Text="曲" FontSize="20" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+                   </StackLayout>
+                    <ListView ItemsSource="{Binding Album.Tracks.Items}"
+                              BackgroundColor="Black"
+                              SeparatorVisibility="None"
+                              RowHeight="60"
+                              HeightRequest="220">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame BackgroundColor="Transparent" HasShadow="false">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding PushModalPlayerPageAsyncCommand, Source={StaticResource viewModel}}" CommandParameter="{Binding Id}" />
+                                        </Frame.GestureRecognizers>
+                                        <StackLayout Orientation="Horizontal" Padding="0, 0, 10, 0">
+                                            <Label Text="{Binding TrackNumber}" WidthRequest="60" VerticalTextAlignment="Center" HorizontalTextAlignment="center" />
+                                            <StackLayout VerticalOptions="Center">
+                                                <Label Text="{Binding Name}" FontSize="Medium" />
+                                                <Label Text="{Binding Artists[0].Name}" TextColor="Silver" FontAttributes="Bold" FontSize="Small" />
+                                            </StackLayout>
+                                            <Label Text="{Binding DurationMs, Converter={StaticResource millisecondsToFormated}}"
+                                                   TextColor="White" VerticalOptions="Center"
+                                                   HorizontalOptions="EndAndExpand" MinimumWidthRequest="40"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+                <StackLayout VerticalOptions="EndAndExpand" MinimumHeightRequest="160">
+                    <Label Text="他のおすすめはこちら" FontSize="20" Margin="0, 10" VerticalOptions="EndAndExpand" FontAttributes="Bold" />
+                    <cont:GridImagesView Stack="{Binding RelatedAlbums, Converter={StaticResource albumsToImages}}"
+                                         VerticalOptions="End" ImageWidthRequest="80"
+                                         RowHeight="2"
+                                         Orientation="Horizontal"
+                                         TitleFontSize="15"
+                                         BorderSize="2"
+                                         DescriptionFontSize="15"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

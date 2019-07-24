@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:cont = "clr-namespace:Black.Views.Controls"
+            x:Class="Black.Views.Controls.GridImagesView"
+            x:Name="this">
+    <ContentView.Content>
+        <StackLayout>
+            <Label Text="{Binding Title, Source={x:Reference this}}"
+                   LineBreakMode="TailTruncation"
+                   TextColor="White" 
+                   FontSize="{Binding ImagesTitleFontSize, Source={x:Reference this}}"
+                   FontAttributes="Bold" />
+            <ScrollView Orientation="{Binding Orientation, Source={x:Reference this}}">
+                <Grid x:Name="imagesGrid" ColumnSpacing="10" RowSpacing="5" Padding="5" Margin="0">
+                        <!-- Childrenはコードビハインドで定義 -->
+                </Grid>
+            </ScrollView>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

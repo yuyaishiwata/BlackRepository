@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cont="clr-namespace:Black.Views.Controls"
+             xmlns:conv="clr-namespace:Black.Converters;assembly=Black"
+             xmlns:views="clr-namespace:Black.Views"
+             xmlns:vm="clr-namespace:Black.ViewModels"
+             x:Class="Black.Views.IndexPage"
+             Title="{Binding Title}"
+             BackgroundColor="Black">    
+    <ContentPage.Content>
+        <ScrollView Orientation="Vertical">
+            <StackLayout>
+                <cont:GridImagesView Stack="{Binding TopChartOfJapan, Converter={StaticResource tracksToImages}}"
+                                     Title="{Binding TopChartOfJapan.Title}"
+                                     ImagesTitleFontSize="25"
+                                     BorderSize="1"
+                                     CornerRadius="3"
+                                     TitleFontSize="15"
+                                     DescriptionFontSize="12"
+                                     ImageWidthRequest="110"
+                                     ImageHeightRequest="110"/>
+                <cont:GridImagesView Stack="{Binding BazzedTracks, Converter={StaticResource tracksToImages}}"
+                                     Title="{Binding BazzedTracks.Title}"
+                                     ImagesTitleFontSize="25"
+                                     Margin="0, 5, 0, 0"
+                                     BorderSize="1"
+                                     CornerRadius="3"
+                                     TitleFontSize="15"
+                                     DescriptionFontSize="12"
+                                     ImageWidthRequest="110"
+                                     ImageHeightRequest="110"/>
+                <cont:GridImagesView Stack="{Binding NewReleases, Converter={StaticResource albumsToImages}}"
+                                     Title="{Binding NewReleases.Title}"
+                                     ImagesTitleFontSize="25"
+                                     Margin="0, 5, 0, 0"
+                                     RowHeight="2"
+                                     BorderSize="2"
+                                     IsCircle="True"
+                                     TitleFontSize="20"
+                                     DescriptionFontSize="10"/>
+                <cont:GridImagesView Stack="{Binding TopChart, Converter={StaticResource tracksToImages}}"
+                                     Title="{Binding TopChart.Title}"
+                                     ImagesTitleFontSize="25"
+                                     Margin="0, 5, 0, 0"
+                                     BorderSize="1"
+                                     CornerRadius="3"
+                                     TitleFontSize="15"
+                                     DescriptionFontSize="12"
+                                     ImageWidthRequest="100"
+                                     ImageHeightRequest="100"
+                                     HeightRequest="200"/>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
