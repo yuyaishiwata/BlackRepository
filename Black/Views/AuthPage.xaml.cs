@@ -12,34 +12,26 @@ namespace Black.Views
     {
         AuthViewModel viewModel;
 
-        public AuthPage()
+        public AuthPage(bool isClearing = false)
         {
             InitializeComponent();
-            BindingContext = viewModel = new AuthViewModel();
 
-            web.Navigating += OnNavigating;
-        }
-
-        private async void OnNavigating(object sender, WebNavigatingEventArgs args)
-        {
-            if (args.Url.StartsWith("black://localhost/auth/spotify", StringComparison.CurrentCulture))
+            if (isClearing)
             {
-                web.Navigating -= OnNavigating;
-
-                var uri = new Uri(args.Url);
-                if (uri.Query.StartsWith("?code=", StringComparison.CurrentCulture))
-                {
-                    string code = uri.Query.TrimStart('?').Split('&').First().Split('=').LastOrDefault();
-
-                    AuthorizationCodeAuth auth = await AuthorizationCodeAuth.GetToken(code);
-                    Application.Current.Resources.Add("auth", auth);
-
-                    var mainPage = new MainPage();
-                    NavigationPage.SetHasNavigationBar(mainPage, false);
-
-                    Application.Current.MainPage = new NavigationPage(mainPage);
-                }
+                Application.Current.Properties.Remove("auth");
+                DependencyService.Get<IClearCookies>().Clear();
             }
+
+            BindingContext = viewModel =
+                Application.Current.Properties.ContainsKey("auth") ?
+                    new AuthViewModel(Navigation, (string)Application.Current.Properties["auth"]) :
+                    new AuthViewModel(Navigation);
+
+            viewModel.AuthorizationCompleted += () =>
+            {
+                Application.Current.Resources["auth"] = viewModel.Auth;
+                Application.Current.MainPage = new NavigationPage(new IndexPage());
+            };
         }
     }
 }

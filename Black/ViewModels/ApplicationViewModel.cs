@@ -17,18 +17,11 @@ namespace Black.ViewModels
         bool IsPlayerVisible { get; set; } = false;
         public void TogglePlayerVisible() => IsPlayerVisible = !IsPlayerVisible;
 
-        public Command NavigateCommand;
-
-
         string title = string.Empty;
         public string Title { get => title; set => SetProperty(ref title, value); }
 
-
         protected ApplicationViewModel()
         {
-            //コマンド定義
-            NavigateCommand = new Command<Page>(async (Page page) => await Navigation.PushAsync(page));
-
             NavigateAlbumPageCommand = new Command<string>(ExecuteNavigateAlbumPageCommand);
             NavigateArtistPageCommand = new Command<string>(ExecuteNavigateArtistPageCommand);
 

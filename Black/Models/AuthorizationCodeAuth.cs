@@ -66,6 +66,12 @@ namespace Black.Models
             };
         }
 
+        public static async Task<AuthorizationCodeAuth> GetTokenByRefreshToken(string refreshToken)
+        {
+            var auth = new AuthorizationCodeAuth { RefreshToken = refreshToken };
+            return await auth.Refresh();
+        }
+
         static async Task<HttpResponseMessage> SendAccessRequestAsync(string authorizationCode)
         {
             string auth = Convert.ToBase64String(Encoding.UTF8.GetBytes(ClientId + ":" + ClientSecret));

@@ -27,7 +27,6 @@ namespace Black.Views.Controls
             get => (List<ImageWithInfo>)GetValue(StackProperty);
         }
 
-
         public int BorderSize
         {
             set => SetValue(BorderSizeProperty, value);
@@ -132,6 +131,8 @@ namespace Black.Views.Controls
 
                         images[index].BorderSize = BorderSize;
                         images[index].WidthRequest = ImageWidthRequest;
+                        images[index].ImageHeightRequest = ImageHeightRequest;
+                        images[index].ImageWidthRequest = ImageWidthRequest;
                         images[index].CornerRadius = IsCircle ? ImageWidthRequest / 2 : CornerRadius;
                         images[index].TitleFontSize = TitleFontSize;
                         images[index].DescriptionFontSize = DescriptionFontSize;

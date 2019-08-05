@@ -26,11 +26,15 @@ namespace Black.ViewModels
 
         public async Task InitializeAsync(string artistId)
         {
+            IsRunning = true;
+
             Artist = await Artists.GetArtistByIdAsync(artistId);
             ArtistsAlbums = await Albums.GetAlbumsByArtistId(artistId, 20, 0, "JP");
             RelatedArtists = await Artists.GetRelatedArtistsById(artistId);
 
             Title = Artist.Name;
+
+            IsRunning = false;
         }
     }
 }

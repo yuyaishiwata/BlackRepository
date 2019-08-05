@@ -1,8 +1,28 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Black.Views.AuthPage">
+             xmlns:cont="clr-namespace:Black.Converters"
+             x:Class="Black.Views.AuthPage"
+             BackgroundColor="Black">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <cont:TrueToFalseConverter x:Key="trueToFalse" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <WebView x:Name="web" Source="{Binding AuthRequestUrl}" />
+        <StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsRunning}" IsVisible="{Binding IsRunning}" Color="White" HeightRequest="40" />
+            <StackLayout IsVisible="{Binding IsInitialized}"
+                         VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <Label Text="Welcome to Black" FontSize="30" FontAttributes="Bold" TextColor="White" Margin="0, 0, 0, 60" />
+                <Button Text="Spotifyにログイン"
+                        BackgroundColor="#00cc66"
+                        Command="{Binding NavigateLoginPage}"
+                        CornerRadius="20"
+                        FontAttributes="Bold"
+                        Padding="60, 5"
+                        TextColor="White" />
+            </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

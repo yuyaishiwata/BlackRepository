@@ -8,6 +8,11 @@ namespace Black.Models
         [JsonProperty("artists")]
         public Artists Artists { get; set; }
     }
+    public class TrackList
+    {
+        [JsonProperty("tracks")]
+        public Tracks Tracks { get; set; }
+    }
 
     public class Followers
     {
@@ -17,7 +22,6 @@ namespace Black.Models
         [JsonProperty("total")]
         public int Total { get; set; }
     }
-
 
     public class Copyright
     {

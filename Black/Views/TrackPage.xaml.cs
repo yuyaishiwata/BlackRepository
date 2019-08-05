@@ -1,5 +1,6 @@
 ﻿using Xamarin.Forms;
 
+using Black.Converters;
 using Black.ViewModels;
 
 namespace Black.Views
@@ -11,6 +12,7 @@ namespace Black.Views
         public TrackPage(string trackId)
         {
             BindingContext = viewModel = new TrackViewModel(Navigation, trackId);
+            Resources.Add("tracksToImages", new TracksToImageWithInfoListConverter { TapCommand = viewModel.ReloadTrackCommand });
 
             InitializeComponent();
 

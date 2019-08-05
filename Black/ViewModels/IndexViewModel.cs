@@ -17,11 +17,8 @@ namespace Black.ViewModels
         Tracks bazzedTracks = new Tracks();
         public Tracks BazzedTracks { get => bazzedTracks; set => SetProperty(ref bazzedTracks, value); }
 
-        Albums newReleases;
+        Albums newReleases = new Albums();
         public Albums NewReleases { get => newReleases; set => SetProperty(ref newReleases, value); }
-
-        Categories categories;
-        public Categories Categories { get => categories; set => SetProperty(ref categories, value); }
 
         //コンストラクタ
         public IndexViewModel(INavigation navigation)
@@ -32,9 +29,9 @@ namespace Black.ViewModels
             InitializeAsync();
         }
 
-
         public async Task InitializeAsync()
         {
+            IsRunning = true;
 
             TopChartOfJapan = await Tracks.GetTracksByPlaylistId("37i9dQZEVXbKXQ4mDTEBXq", 15, 0, "JP");
             TopChartOfJapan.Title = "トップチャート (日本)";
@@ -48,8 +45,7 @@ namespace Black.ViewModels
             NewReleases = await Albums.GetNewReleasedAlbums(20, 0, "JP");
             NewReleases.Title = "ニューリリース";
 
-            Categories = await Categories.GetCategoriesAsync(10, 0, "JP");
-            Categories.Title = "カテゴリ";
+            IsRunning = false;
         }
     }
 }

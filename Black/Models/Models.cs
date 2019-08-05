@@ -23,24 +23,22 @@ namespace Black.Models
 
     public abstract class Models<TModel> : List<TModel>
     {
-        protected string NextUrl { get; private set; } = string.Empty;
-        protected bool HasNext { get => !string.IsNullOrEmpty(NextUrl); }
-
-        protected string PreviousUrl { get; private set; } = string.Empty;
-        protected bool HasPrevious { get => !string.IsNullOrEmpty(PreviousUrl); }
-
         protected static async Task<TDeserialized> GetAsync<TDeserialized>(string path)
         {
             if (!Models.IsValided())
                 throw new InvalidAuthorizationException("Authフィールドに認証用インスタンスが登録されていません。");
 
-            var request = new HttpRequestMessage(HttpMethod.Get, Models.RootEndPoint + path);
-            request.Headers.Add("Authorization", "Bearer " + await Models.GetAccessToken());
+            using (var request = new HttpRequestMessage(HttpMethod.Get, Models.RootEndPoint + path))
+            using (var client = new HttpClient())
+            {
+                request.Headers.Add("Authorization", "Bearer " + await Models.GetAccessToken());
 
-            HttpResponseMessage response = await new HttpClient().SendAsync(request);
-            string json = await response.Content.ReadAsStringAsync();
+                HttpResponseMessage response = await client.SendAsync(request);
+                string json = await response.Content.ReadAsStringAsync();
+                response.Dispose();
 
-            return JsonConvert.DeserializeObject<TDeserialized>(json);
+                return JsonConvert.DeserializeObject<TDeserialized>(json);
+            }
         }
 
         /*

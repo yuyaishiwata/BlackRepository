@@ -9,12 +9,6 @@ namespace Black.Models
         public Paging<Album> Paging { get; set; }
     }
 
-    public class CategoryPaging
-    {
-        [JsonProperty("categories")]
-        public Paging<Category> Paging { get; set; }
-    }
-
     public class Paging<T>
     {
         [JsonProperty("href")]

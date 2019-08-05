@@ -1,18 +1,20 @@
-﻿using Xamarin.Forms;
+﻿using System;
+
+using Xamarin.Forms;
 
 using Black.Views;
+using Black.Models;
 
 namespace Black.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        public Command NavigateAuthPage { get; set; }
+        Uri authRequestUrl;
+        public Uri AuthRequestUrl { get => authRequestUrl; set => SetProperty(ref authRequestUrl, value); }
 
-        public LoginViewModel(INavigation navigation)
+        public LoginViewModel()
         {
-            Navigation = navigation;
-
-            NavigateAuthPage = new Command(async () => await Navigation.PushAsync(new AuthPage()));
+            AuthRequestUrl = new Uri(AuthorizationCodeAuth.GetUrl());
         }
     }
 }

@@ -20,6 +20,7 @@
   <ItemGroup>
     <Compile Remove="Models\ApiClient\CredentialsAuth.cs" />
     <Compile Remove="Views\Controls\HorizontalImageListView.xaml.cs" />
+    <Compile Remove="Views\MainPage.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Converters\" />
@@ -28,6 +29,7 @@
   <ItemGroup>
     <EmbeddedResource Remove="Views\ItemDetailPage.xaml" />
     <EmbeddedResource Remove="Views\Controls\HorizontalImageListView.xaml" />
+    <EmbeddedResource Remove="Views\MainPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Controls\HorizontalImageListView %28コピー%29.xaml.cs">

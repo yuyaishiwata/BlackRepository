@@ -43,6 +43,17 @@ namespace Black.Views.Controls
             }
         }
 
+        bool isLoading = true;
+        private bool IsLoading
+        {
+            get => isLoading;
+            set
+            {
+                isLoading = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ImageWithInfo()
         {
             InitializeComponent();
@@ -50,6 +61,22 @@ namespace Black.Views.Controls
             description.IsVisible = false;
 
             SetOutsideAndInsideCornerRadius(this, null, CornerRadius);
+
+            LoadImageAsync();
+        }
+
+        private async Task LoadImageAsync()
+        {
+            await Task.Delay(300);
+            if (image.IsLoading)
+            {
+                while (image.IsLoading)
+                    await Task.Delay(100);
+            }
+
+            frame.IsVisible = true;
+            indicator.IsRunning = false;
+            indicator.IsVisible = false;
         }
 
         public static void SetOutsideAndInsideCornerRadius(BindableObject bindable, object oldValue, object newValue)

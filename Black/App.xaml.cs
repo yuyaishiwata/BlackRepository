@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Black.Views;
 
-using System.Diagnostics;
+using Black.Views;
+using Black.Models;
 
 namespace Black
 {
@@ -13,9 +14,9 @@ namespace Black
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new LoginPage());
+            MainPage = new NavigationPage(new AuthPage());
         }
-        
+
         protected override void OnStart()
         {
             // Handle when your app starts

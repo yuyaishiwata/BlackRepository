@@ -2,21 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:cont="clr-namespace:Black.Views.Controls"
-             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              x:Class="Black.Views.TrackPage" Title="{Binding Title}"
              BackgroundColor="Black">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style TargetType="Label">
-                <Setter Property="TextColor" Value="White" />
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-    
     <ContentPage.Content>
         <AbsoluteLayout>
             <StackLayout AbsoluteLayout.LayoutFlags="All"
-                         AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
+                         AbsoluteLayout.LayoutBounds="0, 0, 1, 0.8">
+                <ActivityIndicator IsRunning="{Binding IsRunning}" IsVisible="{Binding IsRunning}" Color="White" HeightRequest="40" />
+
                 <Frame BackgroundColor="Transparent"
                        Margin="0" Padding="0"
                        HasShadow="false">
@@ -70,22 +63,66 @@
                                 </StackLayout>
                             </StackLayout>
                         </Frame>
+
+                        <Label Text="関連曲:" FontAttributes="Bold" FontSize="20" Margin="5, 10, 0, 15" />
+                        <cont:GridImagesView Stack="{Binding RelatedTracks, Converter={StaticResource tracksToImages}}"
+                                             ColumnHeight="4"
+                                             Orientation="Vertical"
+                                             TitleFontSize="17"
+                                             DescriptionFontSize="10"
+                                             Padding="0, 10"
+                                             ImageWidthRequest="100"/>
                     </StackLayout>
                 </ScrollView>
             </StackLayout>
 
             <Frame AbsoluteLayout.LayoutFlags="All"
-                   AbsoluteLayout.LayoutBounds="0.5, 0.96, 0.95, 0.15"
-                   BackgroundColor="#AA555555"
+                   AbsoluteLayout.LayoutBounds="0.5, 1, 1, 0.2"
+                   BackgroundColor="Black"
                    CornerRadius="6"
-                   Padding="15, 15">
+                   Padding="15, 15"
+                   HeightRequest="100">
                 <StackLayout>
                     <ProgressBar x:Name="pb"  />
-                    <Grid Margin="0, 20, 0, 0">
-                        <Image Grid.Column="0" Grid.Row="0" Source="/Users/ga.rma/skip_left.png" WidthRequest="20"/>
-                        <Image Grid.Column="1" Grid.Row="0" Source="/Users/ga.rma/play_on.png" WidthRequest="40"/>
-                        <Image Grid.Column="2" Grid.Row="0" Source="/Users/ga.rma/skip_right.png" WidthRequest="25"/>
-                        </Grid>
+                    <Grid Margin="0, 20, 0, 0" HeightRequest="70">
+                        <Image Grid.Column="0" Grid.Row="0" WidthRequest="40">
+                            <Image.Source>
+                                <OnPlatform x:TypeArguments="FileImageSource">
+                                    <On Platform="iOS" Value="skip_left.png" />
+                                </OnPlatform>
+                            </Image.Source>
+                        </Image>
+                        <Image Grid.Column="1" Grid.Row="0" WidthRequest="80">
+                            <Image.Source>
+                                <OnPlatform x:TypeArguments="FileImageSource">
+                                    <On Platform="iOS" Value="play.png" />
+                                </OnPlatform>
+                            </Image.Source>
+                        </Image>
+                        <Image Grid.Column="2" Grid.Row="0" WidthRequest="40">
+                            <Image.Source>
+                                <OnPlatform x:TypeArguments="FileImageSource">
+                                    <On Platform="iOS" Value="skip_right.png" />
+                                </OnPlatform>
+                            </Image.Source>
+                        </Image>
+                    </Grid>
+                    <Grid Margin="0, 20, 0, 0" HeightRequest="30">
+                        <Image Grid.Column="0" Grid.Row="0" WidthRequest="40">
+                            <Image.Source>
+                                <OnPlatform x:TypeArguments="FileImageSource">
+                                    <On Platform="iOS" Value="bad.png" />
+                                </OnPlatform>
+                            </Image.Source>
+                        </Image>
+                        <Image Grid.Column="1" Grid.Row="0" WidthRequest="40">
+                            <Image.Source>
+                                <OnPlatform x:TypeArguments="FileImageSource">
+                                    <On Platform="iOS" Value="good.png" />
+                                </OnPlatform>
+                            </Image.Source>
+                        </Image>
+                    </Grid>
                 </StackLayout>
             </Frame>
         </AbsoluteLayout>

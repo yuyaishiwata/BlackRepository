@@ -9,6 +9,7 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
+                <ActivityIndicator IsRunning="{Binding IsRunning}" IsVisible="{Binding IsRunning}" Color="White" HeightRequest="40" />
                 <AbsoluteLayout>
                     <Image AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
                            AbsoluteLayout.LayoutBounds="0, 0, 1, AutoSize"

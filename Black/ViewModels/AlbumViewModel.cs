@@ -24,8 +24,12 @@ namespace Black.ViewModels
 
         public async Task InitializeAsync(string albumId)
         {
+            IsRunning = true;
+
             Album = await Albums.GetAlbumById(albumId);
             RelatedAlbums = await Albums.GetAlbumsByArtistId(Album.Artists[0].Id);
+
+            IsRunning = false;
         }
     }
 }

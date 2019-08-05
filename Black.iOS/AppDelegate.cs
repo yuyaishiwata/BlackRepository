@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-
-using System.Linq;
-using System.Diagnostics;
-
 using Foundation;
 using UIKit;
 
@@ -30,8 +24,9 @@ namespace Black.iOS
         {
             global::Xamarin.Forms.Forms.Init();
 
-            mainForms = new App();
+            Xamarin.Forms.DependencyService.Register<ClearCookies>();
 
+            mainForms = new App();
             LoadApplication(mainForms);
 
             return base.FinishedLaunching(app, options);

@@ -2,15 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:cont="clr-namespace:Black.Views.Controls"
-             xmlns:conv="clr-namespace:Black.Converters;assembly=Black"
-             xmlns:views="clr-namespace:Black.Views"
-             xmlns:vm="clr-namespace:Black.ViewModels"
              x:Class="Black.Views.IndexPage"
              Title="{Binding Title}"
              BackgroundColor="Black">    
     <ContentPage.Content>
         <ScrollView Orientation="Vertical">
             <StackLayout>
+                <ActivityIndicator IsRunning="{Binding IsRunning}" IsVisible="{Binding IsRunning}" Color="White" HeightRequest="40" />
                 <cont:GridImagesView Stack="{Binding TopChartOfJapan, Converter={StaticResource tracksToImages}}"
                                      Title="{Binding TopChartOfJapan.Title}"
                                      ImagesTitleFontSize="25"
@@ -50,6 +48,11 @@
                                      ImageWidthRequest="100"
                                      ImageHeightRequest="100"
                                      HeightRequest="200"/>
+
+
+                <Button Text="ログアウト" BackgroundColor="Red" CornerRadius="10" TextColor="White"
+                        Clicked="Logout"
+                        HeightRequest="40" Margin="20, 0" />
 
             </StackLayout>
         </ScrollView>
